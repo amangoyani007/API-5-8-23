@@ -12,12 +12,15 @@ const { json } = require('body-parser');
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
-        res.status(400);
+        // res.status(500);
         throw new Error("All Field are mandatery");
     }
     const userAvailable = await User.findOne({ email });
+    console.log("here pass");
+
     if (userAvailable) {
         res.status(400);
+        console.log("here pass");
         throw new Error("User allready registerd ");
     }
 
