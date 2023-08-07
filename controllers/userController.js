@@ -68,6 +68,10 @@ const loginUser = asyncHandler(async (req, res) => {
         );
         res.status(200).json({ accessToken });
     }
+    else{
+        res.status(400);
+        throw new Error("email or password is not valid");
+    }
     res.json({ message: "Login the user" });
 });
 
@@ -76,8 +80,7 @@ const loginUser = asyncHandler(async (req, res) => {
 //@access privat
 
 const currentUser = asyncHandler(async (req, res) => {
-
-    res.json({ message: "Current User Information" });
+    res.json(req.user);
 });
 
 module.exports = { registerUser, loginUser, currentUser };
